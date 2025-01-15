@@ -1,0 +1,38 @@
+(.venv) (base) mahdi@s-8d3a265e testing-python-exercise-wt2425 % pytest -s
+========================================== test session starts ==========================================
+platform darwin -- Python 3.12.4, pytest-7.4.4, pluggy-1.0.0
+rootdir: /Users/mahdi/Documents/SSE Exercises/testing-python-exercise-wt2425
+plugins: anyio-4.2.0
+collected 5 items                                                                                       
+
+tests/integration/test_diffusion2d.py ..
+tests/unit/test_diffusion2d_functions.py .dt = 0.00020000000000000004
+F.
+
+=============================================== FAILURES ================================================
+__________________________________ test_initialize_physical_parameters __________________________________
+
+    def test_initialize_physical_parameters():
+        """
+        Checks function SolveDiffusion2D.initialize_domain
+        """
+        solver = SolveDiffusion2D()
+    
+        _d = 5.
+        _T_cold = 500.
+        _T_hot = 600.
+    
+        solver.dx = 0.1
+        solver.dy = 0.1
+    
+        solver.initialize_physical_parameters(d=_d, T_cold=_T_cold, T_hot=_T_hot)
+    
+>       assert solver.dt == 0.0005000000000000001
+E       assert 0.00020000000000000004 == 0.0005000000000000001
+E        +  where 0.00020000000000000004 = <diffusion2d.SolveDiffusion2D object at 0x1168212b0>.dt
+
+tests/unit/test_diffusion2d_functions.py:41: AssertionError
+======================================== short test summary info ========================================
+FAILED tests/unit/test_diffusion2d_functions.py::test_initialize_physical_parameters - assert 0.00020000000000000004 == 0.0005000000000000001
+====================================== 1 failed, 4 passed in 0.27s ======================================
+(.venv) (base) mahdi@s-8d3a265e testing-python-exercise-wt2425 % 

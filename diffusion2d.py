@@ -7,7 +7,6 @@ Example acquired from https://scipython.com/book/chapter-7-matplotlib/examples/t
 import numpy as np
 import matplotlib.pyplot as plt
 
-
 class SolveDiffusion2D:
     def __init__(self):
         """
@@ -38,14 +37,30 @@ class SolveDiffusion2D:
         self.dt = None
 
     def initialize_domain(self, w=10., h=10., dx=0.1, dy=0.1):
+        assert dx != 0, "dx cannot be zero"
+        assert dy != 0, "dy cannot be zero"
+        
+        assert isinstance(w, float), "w must be a float"
+        assert isinstance(h, float), "h must be a float"
+        assert isinstance(dx, float), "dx must be a float"
+        assert isinstance(dy, float), "dy must be a float"
+        
         self.w = w
         self.h = h
         self.dx = dx
         self.dy = dy
+        
         self.nx = int(w / dx)
         self.ny = int(h / dy)
 
-    def initialize_physical_parameters(self, d=4., T_cold=300, T_hot=700):
+    def initialize_physical_parameters(self, d=4., T_cold=300., T_hot=700.):
+        assert d > 0, "Thermal diffusivity must be positive"
+        assert T_cold < T_hot, "T_cold must be less than T_hot"
+        
+        assert isinstance(d, float), "d must be a float"
+        assert isinstance(T_cold, float), "T_cold must be a float"
+        assert isinstance(T_hot, float), "T_hot must be a float"
+        
         self.D = d
         self.T_cold = T_cold
         self.T_hot = T_hot
@@ -67,7 +82,7 @@ class SolveDiffusion2D:
                 p2 = (i * self.dx - cx) ** 2 + (j * self.dy - cy) ** 2
                 if p2 < r2:
                     u[i, j] = self.T_hot
-
+          
         return u.copy()
 
     def do_timestep(self, u_nm1):

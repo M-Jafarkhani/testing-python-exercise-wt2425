@@ -1,0 +1,61 @@
+(.venv) (base) mahdi@s-8d3a265e testing-python-exercise-wt2425 % pytest -s
+=========================================== test session starts ===========================================
+platform darwin -- Python 3.12.4, pytest-7.4.4, pluggy-1.0.0
+rootdir: /Users/mahdi/Documents/SSE Exercises/testing-python-exercise-wt2425
+plugins: anyio-4.2.0
+collected 8 items                                                                                         
+
+tests/integration/test_diffusion2d.py ..
+tests/unit/test_diffusion2d_functions.py Fdt = 0.0005000000000000001
+..Fdt = 0.0005000000000000001
+..
+
+================================================ FAILURES =================================================
+_________________________________________ test_initialize_domain __________________________________________
+
+    def test_initialize_domain():
+        """
+        Check function SolveDiffusion2D.initialize_domain
+        """
+        solver = SolveDiffusion2D()
+    
+        _w = 25.
+        _h = 50.
+        _dx = 0.5
+        _dy = 0.7
+    
+        solver.initialize_domain(w=_w, h=_h, dx=_dx, dy=_dy)
+    
+        assert solver.nx == 50
+>       assert solver.ny == 71
+E       assert 100 == 71
+E        +  where 100 = <diffusion2d.SolveDiffusion2D object at 0x115c217c0>.ny
+
+tests/unit/test_diffusion2d_functions.py:24: AssertionError
+_________________________________ TestDiffusion2D.test_initialize_domain __________________________________
+
+self = <tests.unit.test_diffusion2d_functions.TestDiffusion2D testMethod=test_initialize_domain>
+
+    def test_initialize_domain(self):
+        """
+        Check function SolveDiffusion2D.initialize_domain
+        """
+        solver = SolveDiffusion2D()
+    
+        _w = 25.
+        _h = 50.
+        _dx = 0.5
+        _dy = 0.7
+    
+        solver.initialize_domain(w=_w, h=_h, dx=_dx, dy=_dy)
+    
+        self.assertEqual(solver.nx, 50, "nx is not correct")
+>       self.assertEqual(solver.ny, 71, "ny is not correct")
+E       AssertionError: 100 != 71 : ny is not correct
+
+tests/unit/test_diffusion2d_functions.py:77: AssertionError
+========================================= short test summary info =========================================
+FAILED tests/unit/test_diffusion2d_functions.py::test_initialize_domain - assert 100 == 71
+FAILED tests/unit/test_diffusion2d_functions.py::TestDiffusion2D::test_initialize_domain - AssertionError: 100 != 71 : ny is not correct
+======================================= 2 failed, 6 passed in 0.26s =======================================
+(.venv) (base) mahdi@s-8d3a265e testing-python-exercise-wt2425 % 
