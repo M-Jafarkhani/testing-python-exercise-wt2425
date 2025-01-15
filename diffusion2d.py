@@ -117,6 +117,7 @@ def output_figure(fig, im):
 
 
 def main():
+    
     DiffusionSolver = SolveDiffusion2D()
 
     DiffusionSolver.initialize_domain()

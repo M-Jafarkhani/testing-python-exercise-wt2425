@@ -1,0 +1,12 @@
+requires = ["tox>=4"]
+env_list = ["unitTest", "integrationTest"]
+
+[env.unitTest]
+description = "Unit Tests"
+deps = ["pytest>=8", "matplotlib", "numpy"]
+commands = [["pytest", "tests/unit/test_diffusion2d_functions.py"]]
+
+[env.integrationTest]
+description = "Integration Tests"
+deps = ["pytest>=8", "matplotlib", "numpy"]
+commands = [["pytest", "tests/integration/test_diffusion2d.py"]]

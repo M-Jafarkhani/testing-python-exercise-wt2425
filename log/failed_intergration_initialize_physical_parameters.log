@@ -1,0 +1,96 @@
+(.venv) (base) mahdi@s-8d3a265e testing-python-exercise-wt2425 % pytest                  
+===================================================== test session starts =====================================================
+platform darwin -- Python 3.12.4, pytest-7.4.4, pluggy-1.0.0
+rootdir: /Users/mahdi/Documents/SSE Exercises/testing-python-exercise-wt2425
+plugins: anyio-4.2.0
+collected 8 items                                                                                                             
+
+tests/integration/test_diffusion2d.py F.                                                                                [ 25%]
+tests/unit/test_diffusion2d_functions.py .F..F.                                                                         [100%]
+
+========================================================== FAILURES ===========================================================
+_____________________________________________ test_initialize_physical_parameters _____________________________________________
+
+    def test_initialize_physical_parameters():
+        """
+        Checks function SolveDiffusion2D.test_initialize_physical_parameters
+        """
+        solver = SolveDiffusion2D()
+    
+        _w = 10.
+        _h = 20.
+        _dx = 30.
+        _dy = 40.
+    
+        solver.initialize_domain(_w, _h, _dx, _dy)
+    
+        _d = 20.
+        _T_Cold = 400.
+        _T_Hot = 600.
+    
+        solver.initialize_physical_parameters(_d, _T_Cold, _T_Hot)
+    
+        _expeted_dt = 14.4
+    
+>       assert solver.dt == _expeted_dt
+E       assert 7.2 == 14.4
+E        +  where 7.2 = <diffusion2d.SolveDiffusion2D object at 0x116319fd0>.dt
+
+tests/integration/test_diffusion2d.py:29: AssertionError
+---------------------------------------------------- Captured stdout call -----------------------------------------------------
+dt = 7.2
+_____________________________________________ test_initialize_physical_parameters _____________________________________________
+
+    def test_initialize_physical_parameters():
+        """
+        Checks function SolveDiffusion2D.initialize_physical_parameters
+        """
+        solver = SolveDiffusion2D()
+    
+        _d = 5.
+        _T_cold = 500.
+        _T_hot = 600.
+    
+        solver.dx = 0.1
+        solver.dy = 0.1
+    
+        solver.initialize_physical_parameters(d=_d, T_cold=_T_cold, T_hot=_T_hot)
+    
+>       assert solver.dt == 0.0005000000000000001
+E       assert 0.00025000000000000006 == 0.0005000000000000001
+E        +  where 0.00025000000000000006 = <diffusion2d.SolveDiffusion2D object at 0x11631ac00>.dt
+
+tests/unit/test_diffusion2d_functions.py:42: AssertionError
+---------------------------------------------------- Captured stdout call -----------------------------------------------------
+dt = 0.00025000000000000006
+_____________________________________ TestDiffusion2D.test_initialize_physical_parameters _____________________________________
+
+self = <tests.unit.test_diffusion2d_functions.TestDiffusion2D testMethod=test_initialize_physical_parameters>
+
+    def test_initialize_physical_parameters(self):
+        """
+        Checks function SolveDiffusion2D.initialize_physical_parameters
+        """
+        solver = SolveDiffusion2D()
+    
+        _d = 5.
+        _T_cold = 500.
+        _T_hot = 600.
+    
+        solver.dx = 0.1
+        solver.dy = 0.1
+    
+        solver.initialize_physical_parameters(d=_d, T_cold=_T_cold, T_hot=_T_hot)
+    
+>       self.assertAlmostEqual(solver.dt,0.0005,delta=0.0000001,msg='dt not correct')
+E       AssertionError: 0.00025000000000000006 != 0.0005 within 1e-07 delta (0.00024999999999999995 difference) : dt not correct
+
+tests/unit/test_diffusion2d_functions.py:94: AssertionError
+---------------------------------------------------- Captured stdout call -----------------------------------------------------
+dt = 0.00025000000000000006
+=================================================== short test summary info ===================================================
+FAILED tests/integration/test_diffusion2d.py::test_initialize_physical_parameters - assert 7.2 == 14.4
+FAILED tests/unit/test_diffusion2d_functions.py::test_initialize_physical_parameters - assert 0.00025000000000000006 == 0.0005000000000000001
+FAILED tests/unit/test_diffusion2d_functions.py::TestDiffusion2D::test_initialize_physical_parameters - AssertionError: 0.00025000000000000006 != 0.0005 within 1e-07 delta (0.00024999999999999995 difference) : dt not correct
+================================================= 3 failed, 5 passed in 0.27s =================================================
+(.venv) (base) mahdi@s-8d3a265e testing-python-exercise-wt2425 % 

@@ -1,0 +1,107 @@
+(.venv) (base) mahdi@s-8d3a265e testing-python-exercise-wt2425 % pytest
+===================================================== test session starts =====================================================
+platform darwin -- Python 3.12.4, pytest-7.4.4, pluggy-1.0.0
+rootdir: /Users/mahdi/Documents/SSE Exercises/testing-python-exercise-wt2425
+plugins: anyio-4.2.0
+collected 8 items                                                                                                             
+
+tests/integration/test_diffusion2d.py .F                                                                                [ 25%]
+tests/unit/test_diffusion2d_functions.py ..F..F                                                                         [100%]
+
+========================================================== FAILURES ===========================================================
+_________________________________________________ test_set_initial_condition __________________________________________________
+
+    def test_set_initial_condition():
+        """
+        Checks function SolveDiffusion2D.set_initial_condition
+        """
+        solver = SolveDiffusion2D()
+    
+        _w = 20.
+        _h =  30.
+        _dx = 5.
+        _dy = 5.
+    
+        _T_Cold = 400.
+        _T_Hot = 800.
+    
+        solver.initialize_domain(_w, _h, _dx, _dy)
+    
+        solver.T_cold = _T_Cold
+        solver.T_hot = _T_Hot
+    
+        _output = solver.set_initial_condition()
+    
+        _expected = _T_Cold * np.ones((solver.nx, solver.ny))
+    
+        r, cx, cy = 2, 5, 5
+        r2 = r ** 2
+    
+        for i in range(solver.nx):
+            for j in range(solver.ny):
+                p2 = (i * solver.dx - cx) ** 2 + (j * solver.dy - cy) ** 2
+                if p2 < r2:
+                    _expected[i, j] = _T_Hot
+    
+>       assert np.equal(_output, _expected).all()
+E       AssertionError: assert False
+E        +  where False = <built-in method all of numpy.ndarray object at 0x113c145d0>()
+E        +    where <built-in method all of numpy.ndarray object at 0x113c145d0> = array([[ True, False,  True,  True,  True,  True],\n       [False,  True, False,  True,  True,  True],\n       [ True, False,  True,  True,  True,  True],\n       [ True,  True,  True,  True,  True,  True]]).all
+E        +      where array([[ True, False,  True,  True,  True,  True],\n       [False,  True, False,  True,  True,  True],\n       [ True, False,  True,  True,  True,  True],\n       [ True,  True,  True,  True,  True,  True]]) = <ufunc 'equal'>(array([[400., 800., 400., 400., 400., 400.],\n       [800., 800., 800., 400., 400., 400.],\n       [400., 800., 400., 400., 400., 400.],\n       [400., 400., 400., 400., 400., 400.]]), array([[400., 400., 400., 400., 400., 400.],\n       [400., 800., 400., 400., 400., 400.],\n       [400., 400., 400., 400., 400., 400.],\n       [400., 400., 400., 400., 400., 400.]]))
+E        +        where <ufunc 'equal'> = np.equal
+
+tests/integration/test_diffusion2d.py:64: AssertionError
+_________________________________________________ test_set_initial_condition __________________________________________________
+
+    def test_set_initial_condition():
+        """
+        Checks function SolveDiffusion2D.set_initial_condition
+        """
+        solver = SolveDiffusion2D()
+    
+        solver.T_cold = 20.
+        solver.nx = 5
+        solver.ny = 5
+        solver.dx = 0.5
+        solver.dy = 0.5
+    
+        _output = solver.set_initial_condition()
+        _expected = solver.T_cold * np.ones((solver.nx, solver.ny))
+    
+>       assert np.equal(_output, _expected).all()
+E       AssertionError: assert False
+E        +  where False = <built-in method all of numpy.ndarray object at 0x113c17450>()
+E        +    where <built-in method all of numpy.ndarray object at 0x113c17450> = array([[ True,  True,  True,  True,  True],\n       [ True,  True,  True,  True, False],\n       [ True,  True,  True, False, False],\n       [ True,  True, False, False, False],\n       [ True, False, False, False, False]]).all
+E        +      where array([[ True,  True,  True,  True,  True],\n       [ True,  True,  True,  True, False],\n       [ True,  True,  True, False, False],\n       [ True,  True, False, False, False],\n       [ True, False, False, False, False]]) = <ufunc 'equal'>(array([[20., 20., 20., 20., 20.],\n       [20., 20., 20., 20., nan],\n       [20., 20., 20., nan, nan],\n       [20., 20., nan, nan, nan],\n       [20., nan, nan, nan, nan]]), array([[20., 20., 20., 20., 20.],\n       [20., 20., 20., 20., 20.],\n       [20., 20., 20., 20., 20.],\n       [20., 20., 20., 20., 20.],\n       [20., 20., 20., 20., 20.]]))
+E        +        where <ufunc 'equal'> = np.equal
+
+tests/unit/test_diffusion2d_functions.py:60: AssertionError
+_________________________________________ TestDiffusion2D.test_set_initial_condition __________________________________________
+
+self = <tests.unit.test_diffusion2d_functions.TestDiffusion2D testMethod=test_set_initial_condition>
+
+    def test_set_initial_condition(self):
+        """
+        Checks function SolveDiffusion2D.set_initial_condition
+        """
+        solver = SolveDiffusion2D()
+    
+        solver.T_cold = 20.
+        solver.nx = 5
+        solver.ny = 5
+        solver.dx = 0.5
+        solver.dy = 0.5
+    
+        _output = solver.set_initial_condition()
+        _expected = solver.T_cold * np.ones((solver.nx, solver.ny))
+    
+>       self.assertEqual(np.equal(_output, _expected).all(),True,msg='Initial condition not working')
+E       AssertionError: False != True : Initial condition not working
+
+tests/unit/test_diffusion2d_functions.py:111: AssertionError
+=================================================== short test summary info ===================================================
+FAILED tests/integration/test_diffusion2d.py::test_set_initial_condition - AssertionError: assert False
+FAILED tests/unit/test_diffusion2d_functions.py::test_set_initial_condition - AssertionError: assert False
+FAILED tests/unit/test_diffusion2d_functions.py::TestDiffusion2D::test_set_initial_condition - AssertionError: False != True : Initial condition not working
+================================================= 3 failed, 5 passed in 0.33s =================================================
+(.venv) (base) mahdi@s-8d3a265e testing-python-exercise-wt2425 % 
