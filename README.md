@@ -9,9 +9,9 @@ Please follow the instructions in [python_testing_exercise.md](https://github.co
 | Unit Test  | pytest  |initialize_domain|[Link](log/failed_test_initialize_domain.log) |
 | Unit Test  | pytest  |initialize_physical_parameters|[Link](log/failed_test_initialize_physical_parameters.log) |
 | Unit Test  | pytest    |set_initial_condition|[Link](log/failed_test_set_initial_condition.log) |
-| Unit Test  | UnitTest  |initialize_domain|[Link](log/failed_unittest_initialize_domain.log) |
-| Unit Test  | UnitTest  |initialize_physical_parameters|[Link](log/failed_unittest_initialize_physical_parameters.log) |
-| Unit Test  | UnitTest  |set_initial_condition|[Link](log/failed_unittest_set_initial_condition.log) |
+| Unit Test  | unittest  |initialize_domain|[Link](log/failed_unittest_initialize_domain.log) |
+| Unit Test  | unittest  |initialize_physical_parameters|[Link](log/failed_unittest_initialize_physical_parameters.log) |
+| Unit Test  | unittest  |set_initial_condition|[Link](log/failed_unittest_set_initial_condition.log) |
 | Integration Test  | pytest  |initialize_physical_parameters|[Link](log/failed_intergration_initialize_physical_parameters.log) |
 | Integration Test  | pytest  |set_initial_condition|[Link](log/failed_intergration_test_set_initial_condition.log) |
 
